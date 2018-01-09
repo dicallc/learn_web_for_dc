@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script >
+    // Vue.component('my-component', {
+    //     template: '<div>A custom component!</div>'
+    // })
+    Vue.component('child', {
+        // 声明 props
+        props: ['message'],
+        // 就像 data 一样，prop 也可以在模板中使用
+        // 同样也可以在 vm 实例中通过 this.message 来使用
+        template: '<span>{{ message }}</span>'
+    })
+</script>
+<body>
+        <div id="app">
+            {{ message }}
+        </div>
+        <div id="app-2">
+          <span v-bind:title="message">
+            鼠标悬停几秒钟查看此处动态绑定的提示信息！
+          </span>
+        </div>
+
+        <div id="app-3">
+            <p v-if="seen">现在你看到我了</p>
+        </div>
+
+        <div id="app-4">
+            <ol>
+                <li v-for="todo in todos">
+                    {{ todo.text }}
+                </li>
+            </ol>
+        </div>
+
+        <div id="app-5">
+            <p>{{ message }}</p>
+            <button v-on:click="reverseMessage">逆转消息</button>
+        </div>
+
+        <div id="app-6">
+            <p>{{ message }}</p>
+            <input v-model="message">
+        </div>
+
+        <div id="example">
+            <my-component></my-component>
+
+        <div id="example1">
+        <child message="hello11!"></child>
+        </div>
+</body>
+
+<script >
+
+    new Vue({
+        el: '#example1'
+    })
+    var Child = {
+        template: '<div>A custom component!</div>'
+    }
+    new Vue({
+        el: '#example',
+        components: {
+            // <my-component> 将只在父组件模板中可用
+            'my-component': Child
+        }
+    })
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello sss!'
+        }
+
+    })
+    var app2 = new Vue({
+        el: '#app-2',
+        data: {
+            message: '页面加载于 ' + new Date().toLocaleString()
+        }
+    })
+    var app3 = new Vue({
+        el: '#app-3',
+        data: {
+            seen: true
+        }
+    })
+    var app4 = new Vue({
+        el: '#app-4',
+        data: {
+            todos: [
+                { text: '学习 JavaScript' },
+                { text: '学习 Vue' },
+                { text: '整个牛项目' }
+            ]
+        }
+    })
+
+    var app5 = new Vue({
+        el: '#app-5',
+        data: {
+            message: 'Hello Vue.js!'
+        },
+        methods: {
+            reverseMessage: function () {
+                this.message = this.message.split('').reverse().join('')
+            }
+        }
+    })
+
+    var app6 = new Vue({
+        el: '#app-6',
+        data: {
+            message: 'Hello Vue!'
+        }
+    })
+
+
+</script>
+</html>

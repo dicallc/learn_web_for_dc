@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <script src="../../dist/template/template.js"></script>
+</head>
+<body>
+<div id="content"></div>
+<script id="test" type="text/html">
+
+    <%
+    include('./header.art', {
+    title: title
+    })
+    %>
+    <p>This is just an awesome page.</p>
+
+    {{include './footer.art'}}
+</script>
+
+
+<script>
+    var data = {
+        title: 'My Page'
+    };
+    var html = template('test', data);
+    document.getElementById('content').innerHTML = html;
+</script>
+</body>
+</html>
